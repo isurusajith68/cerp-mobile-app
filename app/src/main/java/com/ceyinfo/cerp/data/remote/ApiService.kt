@@ -33,20 +33,10 @@ interface ApiService {
     // ── Documents (OCR upload) ──
 
     @Multipart
-    @POST("documents/upload")
-    suspend fun uploadDocument(
-        @Part file: MultipartBody.Part,
-        @Part("module_code") moduleCode: RequestBody,
-        @Part("entity_code") entityCode: RequestBody,
-        @Part("entity_id") entityId: RequestBody,
-        @Part("category") category: RequestBody?
+    @POST("site/ocr-upload")
+    suspend fun uploadDocumentForOcr(
+        @Part file: MultipartBody.Part
     ): Response<ApiResponse<DocumentUploadData>>
-
-    @PATCH("documents/{id}/ocr")
-    suspend fun flagDocumentOcr(
-        @Path("id") id: String,
-        @Body body: OcrFlagRequest
-    ): Response<ApiResponse<Any>>
 
     // ── Photos ──
 

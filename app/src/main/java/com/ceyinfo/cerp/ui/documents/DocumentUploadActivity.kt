@@ -14,7 +14,6 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ceyinfo.cerp.R
-import com.ceyinfo.cerp.data.model.OcrFlagRequest
 import com.ceyinfo.cerp.data.remote.ApiClient
 import com.ceyinfo.cerp.databinding.ActivityDocumentUploadBinding
 import com.ceyinfo.cerp.util.SessionManager
@@ -147,7 +146,6 @@ class DocumentUploadActivity : AppCompatActivity() {
             val api = ApiClient.getService(this@DocumentUploadActivity)
             var uploaded = 0
             var failed = 0
-            val buId = session.businessUnitId ?: ""
 
             for ((index, docFile) in files.withIndex()) {
                 binding.tvUploadProgress.text = "Uploading ${index + 1} of ${files.size}…"
@@ -163,18 +161,9 @@ class DocumentUploadActivity : AppCompatActivity() {
                         bytes.toRequestBody(docFile.mimeType.toMediaTypeOrNull())
                     )
 
-                    val response = api.uploadDocument(
-                        file = filePart,
-                        moduleCode = "site".toRequestBody(),
-                        entityCode = "document".toRequestBody(),
-                        entityId = buId.toRequestBody(),
-                        category = "ocr_uploads".toRequestBody()
-                    )
+                    val response = api.uploadDocumentForOcr(file = filePart)
 
                     if (response.isSuccessful && response.body()?.success == true) {
-                        val docId = response.body()!!.data!!.id
-                        // Flag for OCR
-                        api.flagDocumentOcr(docId, OcrFlagRequest(toBeOcr = true))
                         uploaded++
                     } else {
                         failed++
