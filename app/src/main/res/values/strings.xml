@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CERP Site</string>
+
+    <!-- Login -->
+    <string name="login_title">CERP</string>
+    <string name="login_subtitle">Construction ERP</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Sign In</string>
+    <string name="login_error_empty">Email and password are required</string>
+    <string name="login_error_network">No internet connection</string>
+
+    <!-- BU Selection -->
+    <string name="bu_select_title">Select Business Unit</string>
+    <string name="bu_select_subtitle">Choose a unit to continue</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="menu_photos">Progress Photos</string>
+    <string name="menu_report">Daily Site Report</string>
+    <string name="menu_gallery">Photo Gallery</string>
+    <string name="menu_queue">Sync Queue</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_change_bu">Change Unit</string>
+
+    <!-- Photos -->
+    <string name="photos_title">Progress Photos</string>
+    <string name="btn_camera">Take Photo</string>
+    <string name="btn_gallery">From Gallery</string>
+    <string name="btn_upload">Upload</string>
+    <string name="hint_category">Category</string>
+    <string name="hint_description">Description (optional)</string>
+    <string name="hint_weather">Weather</string>
+    <string name="photos_queued">Photo queued for upload</string>
+    <string name="photos_uploaded">Photo uploaded successfully</string>
+
+    <!-- Daily Report -->
+    <string name="report_title">Daily Site Report</string>
+    <string name="hint_report_date">Report Date</string>
+    <string name="hint_work_summary">Work Summary</string>
+    <string name="hint_workforce">Workforce Count</string>
+    <string name="hint_subcontractor">Subcontractor Count</string>
+    <string name="hint_temp_high">Temp High (\u00B0C)</string>
+    <string name="hint_temp_low">Temp Low (\u00B0C)</string>
+    <string name="hint_issues">Issues / Delays</string>
+    <string name="hint_safety_incidents">Safety Incidents</string>
+    <string name="hint_safety_notes">Safety Notes</string>
+    <string name="hint_material_notes">Material Notes</string>
+    <string name="hint_equipment_notes">Equipment Notes</string>
+    <string name="btn_save_draft">Save Draft</string>
+    <string name="btn_submit">Submit</string>
+    <string name="report_saved">Report saved</string>
+
+    <!-- Gallery -->
+    <string name="gallery_title">Photo Gallery</string>
+    <string name="gallery_empty">No photos yet</string>
+
+    <!-- Queue -->
+    <string name="queue_title">Sync Queue</string>
+    <string name="queue_empty">No items in queue</string>
+    <string name="btn_retry_all">Retry All</string>
+    <string name="btn_clear_completed">Clear Completed</string>
+    <string name="queue_pending">Pending</string>
+    <string name="queue_uploading">Uploading</string>
+    <string name="queue_completed">Completed</string>
+    <string name="queue_failed">Failed</string>
+
+    <!-- Common -->
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="loading">Loading\u2026</string>
+    <string name="error_generic">Something went wrong</string>
+    <string name="btn_retry">Retry</string>
+
+    <!-- Categories -->
+    <string name="cat_foundation">Foundation</string>
+    <string name="cat_structure">Structure</string>
+    <string name="cat_electrical">Electrical</string>
+    <string name="cat_plumbing">Plumbing</string>
+    <string name="cat_roofing">Roofing</string>
+    <string name="cat_finishing">Finishing</string>
+    <string name="cat_landscaping">Landscaping</string>
+    <string name="cat_safety">Safety</string>
+    <string name="cat_equipment">Equipment</string>
+    <string name="cat_material_delivery">Material Delivery</string>
+    <string name="cat_other">Other</string>
+
+    <!-- Weather -->
+    <string name="weather_sunny">Sunny</string>
+    <string name="weather_cloudy">Cloudy</string>
+    <string name="weather_rainy">Rainy</string>
+    <string name="weather_windy">Windy</string>
+    <string name="weather_stormy">Stormy</string>
+</resources>

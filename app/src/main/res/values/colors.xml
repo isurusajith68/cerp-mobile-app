@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#1E3A5F</color>
+    <color name="primary_dark">#142942</color>
+    <color name="primary_light">#2E5A8F</color>
+    <color name="secondary">#F59E0B</color>
+    <color name="surface">#F6F3EE</color>
+    <color name="on_surface">#1E293B</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="error">#DC2626</color>
+    <color name="success">#16A34A</color>
+    <color name="warning">#F59E0B</color>
+    <color name="info">#2563EB</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="divider">#E2E8F0</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="level_org">#1E3A5F</color>
+    <color name="level_division">#7C3AED</color>
+    <color name="level_project">#059669</color>
+    <color name="level_site">#D97706</color>
+    <color name="status_pending">#F59E0B</color>
+    <color name="status_uploading">#2563EB</color>
+    <color name="status_completed">#16A34A</color>
+    <color name="status_failed">#DC2626</color>
+</resources>
