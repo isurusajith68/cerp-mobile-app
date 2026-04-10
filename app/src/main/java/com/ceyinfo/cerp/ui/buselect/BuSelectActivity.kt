@@ -71,17 +71,6 @@ class BuSelectActivity : AppCompatActivity() {
     private fun setupLevelChips(bus: List<BusinessUnit>) {
         binding.chipGroupLevel.removeAllViews()
 
-        val allChip = Chip(this).apply {
-            text = "All"
-            isCheckable = true
-            isChecked = true
-            setOnClickListener {
-                currentFilter = null
-                applyFilters()
-            }
-        }
-        binding.chipGroupLevel.addView(allChip)
-
         val levelCounts = bus.groupBy { it.level?.lowercase() ?: "unknown" }
             .mapValues { it.value.size }
             .toSortedMap(compareBy {
@@ -90,11 +79,39 @@ class BuSelectActivity : AppCompatActivity() {
                 }
             })
 
+        // All chip + level chips
+        val chipItems = mutableListOf<Pair<String?, String>>()
+        chipItems.add(null to "All")
         for ((level, count) in levelCounts) {
             val displayName = level.replaceFirstChar { it.uppercase() }
+            chipItems.add(level to "$displayName ($count)")
+        }
+
+        for ((level, label) in chipItems) {
             val chip = Chip(this).apply {
-                text = "$displayName ($count)"
+                text = label
                 isCheckable = true
+                isChecked = level == null
+                chipCornerRadius = 20f * resources.displayMetrics.density
+                chipStrokeWidth = 1f * resources.displayMetrics.density
+                chipStrokeColor = android.content.res.ColorStateList.valueOf(
+                    ContextCompat.getColor(context, R.color.divider)
+                )
+                chipBackgroundColor = android.content.res.ColorStateList(
+                    arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
+                    intArrayOf(
+                        ContextCompat.getColor(context, R.color.primary),
+                        ContextCompat.getColor(context, R.color.white)
+                    )
+                )
+                setTextColor(android.content.res.ColorStateList(
+                    arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
+                    intArrayOf(
+                        ContextCompat.getColor(context, R.color.white),
+                        ContextCompat.getColor(context, R.color.on_surface)
+                    )
+                ))
+                isCheckedIconVisible = false
                 setOnClickListener {
                     currentFilter = level
                     applyFilters()

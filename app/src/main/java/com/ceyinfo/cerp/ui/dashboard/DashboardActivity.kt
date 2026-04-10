@@ -7,13 +7,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.lifecycleScope
 import com.ceyinfo.cerp.R
 import com.ceyinfo.cerp.data.remote.ApiClient
 import com.ceyinfo.cerp.data.repository.SyncRepository
 import com.ceyinfo.cerp.databinding.ActivityDashboardBinding
 import com.ceyinfo.cerp.ui.buselect.BuSelectActivity
+import com.ceyinfo.cerp.ui.documents.DocumentUploadActivity
 import com.ceyinfo.cerp.ui.gallery.GalleryActivity
 import com.ceyinfo.cerp.ui.login.LoginActivity
 import com.ceyinfo.cerp.ui.photos.PhotoUploadActivity
@@ -35,9 +39,17 @@ class DashboardActivity : AppCompatActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.statusBarColor = android.graphics.Color.TRANSPARENT
+        window.navigationBarColor = android.graphics.Color.TRANSPARENT
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Apply system bar insets to bottom nav
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomBar) { view, insets ->
+            val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updatePadding(bottom = navBarInsets.bottom)
+            insets
+        }
 
         session = SessionManager(this)
         networkMonitor = NetworkMonitor(this)
@@ -79,6 +91,9 @@ class DashboardActivity : AppCompatActivity() {
         binding.cardQueue.setOnClickListener {
             startActivity(Intent(this, QueueActivity::class.java))
         }
+        binding.cardDocuments.setOnClickListener {
+            startActivity(Intent(this, DocumentUploadActivity::class.java))
+        }
 
         binding.btnChangeBu.setOnClickListener {
             if (!networkMonitor.checkNetwork()) {
@@ -92,36 +107,23 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNav() {
-        binding.bottomNav.selectedItemId = R.id.nav_home
+        binding.navHome.setOnClickListener { /* already on home */ }
 
-        binding.bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> true // already here
-                R.id.nav_photos -> {
-                    startActivity(Intent(this, PhotoUploadActivity::class.java))
-                    true
-                }
-                R.id.nav_report -> {
-                    startActivity(Intent(this, DailyReportActivity::class.java))
-                    true
-                }
-                R.id.nav_gallery -> {
-                    startActivity(Intent(this, GalleryActivity::class.java))
-                    true
-                }
-                R.id.nav_sync -> {
-                    startActivity(Intent(this, QueueActivity::class.java))
-                    true
-                }
-                else -> false
-            }
+        binding.navReport.setOnClickListener {
+            startActivity(Intent(this, DailyReportActivity::class.java))
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        // Reset bottom nav to Home when returning
-        binding.bottomNav.selectedItemId = R.id.nav_home
+        binding.fabCamera.setOnClickListener {
+            startActivity(Intent(this, PhotoUploadActivity::class.java))
+        }
+
+        binding.navGallery.setOnClickListener {
+            startActivity(Intent(this, GalleryActivity::class.java))
+        }
+
+        binding.navSettings.setOnClickListener {
+            Toast.makeText(this, "Settings coming soon", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun observeNetwork() {
@@ -142,14 +144,8 @@ class DashboardActivity : AppCompatActivity() {
             if (count > 0) {
                 binding.cardQueue.visibility = View.VISIBLE
                 binding.tvQueueCount.text = "$count item${if (count > 1) "s" else ""} pending sync"
-                // Show badge on bottom nav sync tab
-                binding.bottomNav.getOrCreateBadge(R.id.nav_sync).apply {
-                    number = count
-                    isVisible = true
-                }
             } else {
                 binding.cardQueue.visibility = View.GONE
-                binding.bottomNav.removeBadge(R.id.nav_sync)
             }
             binding.tvSyncSubtitle.text = if (count > 0) "$count pending" else "Upload queue"
         }

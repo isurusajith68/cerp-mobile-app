@@ -75,6 +75,20 @@ data class VerifyModuleData(
     val businessUnitLevel: String? = null
 )
 
+// ── Document Upload ──
+
+data class DocumentUploadData(
+    val id: String,
+    val name: String? = null,
+    @SerializedName("file_key") val fileKey: String? = null,
+    @SerializedName("content_type") val contentType: String? = null,
+    @SerializedName("file_size") val fileSize: Long? = null
+)
+
+data class OcrFlagRequest(
+    @SerializedName("to_be_ocr") val toBeOcr: Boolean
+)
+
 // ── Photos ──
 
 data class ProgressPhoto(

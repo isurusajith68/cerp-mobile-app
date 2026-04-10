@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ceyinfo.cerp.R
@@ -34,7 +35,8 @@ class GalleryActivity : AppCompatActivity() {
         binding.rvPhotos.layoutManager = GridLayoutManager(this, 2)
         binding.rvPhotos.adapter = adapter
 
-        binding.btnBack.setOnClickListener { finish() }
+        binding.appbar.tvAppbarTitle.text = getString(R.string.gallery_title)
+        binding.appbar.btnBack.setOnClickListener { finish() }
 
         setupCategoryChips()
         loadPhotos()
@@ -42,10 +44,31 @@ class GalleryActivity : AppCompatActivity() {
 
     private fun setupCategoryChips() {
         categories.forEach { cat ->
+            val label = if (cat == "All") cat else cat.replace("_", " ").replaceFirstChar { it.uppercase() }
             val chip = Chip(this).apply {
-                text = if (cat == "All") cat else cat.replace("_", " ").replaceFirstChar { it.uppercase() }
+                text = label
                 isCheckable = true
                 isChecked = cat == "All"
+                chipCornerRadius = 20f * resources.displayMetrics.density
+                chipStrokeWidth = 1f * resources.displayMetrics.density
+                chipStrokeColor = android.content.res.ColorStateList.valueOf(
+                    ContextCompat.getColor(context, R.color.divider)
+                )
+                chipBackgroundColor = android.content.res.ColorStateList(
+                    arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
+                    intArrayOf(
+                        ContextCompat.getColor(context, R.color.primary),
+                        ContextCompat.getColor(context, R.color.white)
+                    )
+                )
+                setTextColor(android.content.res.ColorStateList(
+                    arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
+                    intArrayOf(
+                        ContextCompat.getColor(context, R.color.white),
+                        ContextCompat.getColor(context, R.color.on_surface)
+                    )
+                ))
+                isCheckedIconVisible = false
                 setOnClickListener {
                     currentCategory = if (cat == "All") null else cat
                     currentPage = 1

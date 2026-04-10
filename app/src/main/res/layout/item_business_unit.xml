@@ -43,7 +43,7 @@
                 android:background="@drawable/bg_expand_btn"
                 android:contentDescription="Toggle"
                 android:padding="6dp"
-                android:src="@android:drawable/arrow_down_float"
+                android:src="@drawable/ic_expand_more"
                 android:visibility="gone" />
 
             <!-- Leaf icon circle -->
@@ -130,7 +130,7 @@
             android:background="@drawable/bg_select_circle"
             android:contentDescription="Select"
             android:padding="8dp"
-            android:src="@android:drawable/ic_media_play"
+            android:src="@drawable/ic_chevron_right"
             android:tint="@color/white" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

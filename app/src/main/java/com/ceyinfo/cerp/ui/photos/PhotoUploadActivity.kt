@@ -106,7 +106,8 @@ class PhotoUploadActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
-        binding.btnBack.setOnClickListener { finish() }
+        binding.appbar.tvAppbarTitle.text = getString(R.string.photos_title)
+        binding.appbar.btnBack.setOnClickListener { finish() }
 
         binding.btnCamera.setOnClickListener {
             if (checkCameraPermission()) openCamera()

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ceyinfo.cerp.R
 import com.ceyinfo.cerp.data.repository.SyncRepository
 import com.ceyinfo.cerp.databinding.ActivityQueueBinding
 import com.ceyinfo.cerp.worker.SyncWorkerUtil
@@ -28,7 +29,8 @@ class QueueActivity : AppCompatActivity() {
         binding.rvQueue.layoutManager = LinearLayoutManager(this)
         binding.rvQueue.adapter = adapter
 
-        binding.btnBack.setOnClickListener { finish() }
+        binding.appbar.tvAppbarTitle.text = getString(R.string.queue_title)
+        binding.appbar.btnBack.setOnClickListener { finish() }
 
         binding.btnRetryAll.setOnClickListener {
             lifecycleScope.launch {

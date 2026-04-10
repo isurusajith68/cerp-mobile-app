@@ -46,7 +46,8 @@ class DailyReportActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        binding.btnBack.setOnClickListener { finish() }
+        binding.appbar.tvAppbarTitle.text = getString(R.string.report_title)
+        binding.appbar.btnBack.setOnClickListener { finish() }
 
         // Date picker
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)

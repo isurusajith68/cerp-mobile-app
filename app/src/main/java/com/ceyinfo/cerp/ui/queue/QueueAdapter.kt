@@ -32,11 +32,24 @@ class QueueAdapter : ListAdapter<SyncQueueEntity, QueueAdapter.ViewHolder>(DiffC
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: SyncQueueEntity) {
-            binding.tvType.text = when (item.type) {
-                SyncQueueEntity.TYPE_PHOTO -> "Photo Upload"
-                SyncQueueEntity.TYPE_DAILY_REPORT -> "Daily Report"
-                else -> item.type
-            }
+            val ctx = binding.root.context
+            val dp = ctx.resources.displayMetrics.density
+
+            // Type
+            val isPhoto = item.type == SyncQueueEntity.TYPE_PHOTO
+            binding.tvType.text = if (isPhoto) "Photo Upload" else "Daily Report"
+
+            // Type icon + bg color
+            binding.ivTypeIcon.setImageResource(
+                if (isPhoto) R.drawable.ic_nav_camera
+                else R.drawable.ic_nav_report
+            )
+            val iconTint = if (isPhoto) R.color.info else R.color.success
+            binding.ivTypeIcon.setColorFilter(ContextCompat.getColor(ctx, iconTint))
+            val iconBgColor = if (isPhoto) "#DBEAFE" else "#D1FAE5"
+            (binding.bgTypeIcon.background as? GradientDrawable)?.setColor(
+                android.graphics.Color.parseColor(iconBgColor)
+            )
 
             // Status badge
             binding.tvStatus.text = item.status.replaceFirstChar { it.uppercase() }
@@ -48,10 +61,8 @@ class QueueAdapter : ListAdapter<SyncQueueEntity, QueueAdapter.ViewHolder>(DiffC
                 else -> R.color.text_secondary
             }
             val bg = binding.tvStatus.background as? GradientDrawable
-                ?: GradientDrawable().apply {
-                    cornerRadius = 20f * binding.root.context.resources.displayMetrics.density
-                }
-            bg.setColor(ContextCompat.getColor(binding.root.context, statusColor))
+                ?: GradientDrawable().apply { cornerRadius = 6f * dp }
+            bg.setColor(ContextCompat.getColor(ctx, statusColor))
             binding.tvStatus.background = bg
 
             // Created date
