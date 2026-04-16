@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_BASE_URL", "\"https://cerpapi.ceyinfo.com/api/v1/\"")
+
+        // GitHub repo for auto-update (change these to your repo)
+        buildConfigField("String", "GITHUB_OWNER", "\"isurusajith68\"")
+        buildConfigField("String", "GITHUB_REPO", "\"cerp-mobile-app\"")
     }
 
     buildTypes {

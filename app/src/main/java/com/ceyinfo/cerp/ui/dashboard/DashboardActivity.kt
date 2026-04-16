@@ -23,6 +23,8 @@ import com.ceyinfo.cerp.ui.login.LoginActivity
 import com.ceyinfo.cerp.ui.photos.PhotoUploadActivity
 import com.ceyinfo.cerp.ui.queue.QueueActivity
 import com.ceyinfo.cerp.ui.reports.DailyReportActivity
+import com.ceyinfo.cerp.updater.AppUpdater
+import com.ceyinfo.cerp.updater.UpdateDialog
 import com.ceyinfo.cerp.util.NetworkMonitor
 import com.ceyinfo.cerp.util.SessionManager
 import kotlinx.coroutines.launch
@@ -65,6 +67,17 @@ class DashboardActivity : AppCompatActivity() {
         setupBottomNav()
         observeNetwork()
         observeQueue()
+        checkForUpdates()
+    }
+
+    private fun checkForUpdates() {
+        lifecycleScope.launch {
+            val updater = AppUpdater(this@DashboardActivity)
+            val release = updater.checkForUpdate()
+            if (release != null) {
+                UpdateDialog.show(this@DashboardActivity, release, updater)
+            }
+        }
     }
 
     private fun setupUI() {

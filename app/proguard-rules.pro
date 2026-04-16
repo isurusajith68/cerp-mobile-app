@@ -19,3 +19,16 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Keep Gson model classes (used for API + GitHub update responses)
+-keep class com.ceyinfo.cerp.data.model.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+
+# OkHttp
+-dontwarn okhttp3.**
+-dontwarn okio.**
