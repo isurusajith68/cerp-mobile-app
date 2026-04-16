@@ -28,6 +28,9 @@ jobs:
         id: version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build Release APK
         run: |
           ./gradlew assembleRelease \
