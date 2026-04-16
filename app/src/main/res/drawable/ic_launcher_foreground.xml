@@ -30,9 +30,8 @@
         android:fillColor="#F59E0B"
         android:pathData="M67.5,63.5l0,13.5l9,0l0,-2.5l-6.1,0l0,-3l5.5,0l0,-2.5l-5.5,0l0,-3l5.9,0l0,-2.5z" />
 
-    <!-- Small construction helmet icon accent -->
+    <!-- Small construction helmet icon accent (26 = 15% of FF) -->
     <path
-        android:fillColor="#FFFFFF"
-        android:opacity="0.15"
+        android:fillColor="#26FFFFFF"
         android:pathData="M54,24c-8,0 -14.5,6.5 -14.5,14.5c0,1.5 0.2,3 0.7,4.5l27.7,0c0.4,-1.4 0.7,-2.9 0.7,-4.5C68.5,30.5 62,24 54,24z" />
 </vector>
