@@ -23,6 +23,7 @@ import com.ceyinfo.cerp.ui.login.LoginActivity
 import com.ceyinfo.cerp.ui.photos.PhotoUploadActivity
 import com.ceyinfo.cerp.ui.queue.QueueActivity
 import com.ceyinfo.cerp.ui.reports.DailyReportActivity
+import com.ceyinfo.cerp.ui.settings.SettingsActivity
 import com.ceyinfo.cerp.updater.AppUpdater
 import com.ceyinfo.cerp.updater.UpdateDialog
 import com.ceyinfo.cerp.util.NetworkMonitor
@@ -135,7 +136,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         binding.navSettings.setOnClickListener {
-            Toast.makeText(this, "Settings coming soon", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 

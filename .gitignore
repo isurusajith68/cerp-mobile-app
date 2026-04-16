@@ -17,3 +17,6 @@ local.properties
 # Release keystore
 *.jks
 *.keystore
+
+# Release guide (contains signing credentials)
+RELEASE_GUIDE.md

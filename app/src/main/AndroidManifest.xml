@@ -66,6 +66,10 @@
             android:name=".ui.documents.DocumentUploadActivity"
             android:theme="@style/Theme.Cerp.NoActionBar" />
 
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:theme="@style/Theme.Cerp.NoActionBar" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
